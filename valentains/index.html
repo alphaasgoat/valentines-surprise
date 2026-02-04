@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <style>
+        body{
+            background-color: palevioletred;
+        }
+        .Box{
+            width: 1000px;
+            background-color: pink;
+            padding-top: 100px;
+            padding-bottom: 100px;
+            margin-bottom: 100px;
+            border-radius: 100px;
+            border-color: rgb(192, 123, 135);
+            border-width: 50px;
+            margin-top: 100px;
+            background-image: url('bglove.gif');
+            background-repeat: no-repeat;
+            background-attachment: fixed; /*can also make when scrool go down by adding scroll */
+            background-size: cover;
+            background-blend-mode:soft-light;
+
+        }
+
+        #yes{
+            size: 50px;
+            border-radius: 50px;
+            background-color: rgb(240, 159, 173);
+            border-color:rgb(226, 166, 176);
+            border-width: 10px;
+            font-size: 50px;
+            color: rgb(120, 26, 167);
+            font-style: oblique;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            padding-left: 25px;
+            padding-right: 25px;
+            animation: yesBounce 1.2s infinite;
+            box-shadow: 0 0 20px rgba(255, 0, 100, 0.7);
+        }
+                @keyframes yesBounce {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+        #no{
+            size: 50px;
+            border-radius: 50px;
+            background-color: rgb(240, 159, 173);
+            border-color:rgb(226, 166, 176);
+            border-width: 10px;
+            font-size: 50px;
+            color: rgb(120, 26, 167);
+            font-style: oblique;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            padding-left: 25px;
+            padding-right: 25px;
+            margin-left: 80px;
+            animation:shake 0.3s infinite;
+        }
+            @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+        #yesGif {
+            border-radius: 30px;
+            box-shadow: 0 0 25px rgba(255, 0, 100, 0.6);
+            width: 80%;
+            max-width: 300px;
+        }
+        #noGif {
+            border-radius: 30px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+            width: 80%;
+            max-width: 300px;
+        }
+
+        .cant{
+
+            padding-bottom: 50px;
+            color: white;
+            text-shadow: 3px 3px 8px #000000;
+        }
+        .will{
+
+            font-size:50px;
+            color: white;
+            text-shadow: 3px 3px 8px #000000;
+        }
+        .heart {
+            position: fixed;
+            bottom: -20px;
+            font-size: 24px;
+            animation: floatUp 6s linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-110vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <center>
+    <div class="Box">
+
+        <h1 class="will">💝Will You Be My 💝</h1>
+        <h1 class="will">💝VALENTINE?? 💝</h1>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <h3 class="cant">You can't escape babe 😍😘</h3>
+        
+        <div class="button">
+            <button id="yes" onclick="msg(1)">Yes😃</button>
+            <button id="no" onclick="noClicked()">No😫</button>
+        </div>
+        <!-- GIFs appear above the buttons -->
+        <img id="yesGif" src="yes.gif" style="display:none; margin-top:30px; width:300px;">
+        <img id="noGif" src="no2.gif" style="display:none; margin-top:30px; width:300px;">
+    </div>
+    </center>
+    
+
+
+    <script>
+        let yesScale = 1;
+
+        function msg(selection) {
+            let yesGif = document.getElementById("yesGif");
+            let noGif = document.getElementById("noGif");
+
+    
+        yesGif.style.display = "none";
+        noGif.style.display = "none";
+
+        if (selection === 1) {
+            yesGif.style.display = "block";
+            launchConfetti();
+            playLoveSound();
+
+            setTimeout(() => {
+                yesGif.style.display = "none";
+            }, 1000);
+        }
+}
+
+
+        function noClicked() {
+            let yesBtn = document.getElementById("yes");
+            let noBtn = document.getElementById("no");
+            let noGif = document.getElementById("noGif");
+            let yesGif = document.getElementById("yesGif");
+
+            yesGif.style.display = "none";
+            noGif.style.display = "block";
+
+            setTimeout(() => {
+                noGif.style.display = "none";
+            }, 1000);
+
+            yesScale += 0.25;
+            yesBtn.style.transform = `scale(${yesScale})`;
+            yesBtn.style.transition = "transform 0.3s ease";
+
+            let x = Math.random() * 300 - 150;
+            let y = Math.random() * 150 - 75;
+
+            noBtn.style.transform = `translate(${x}px, ${y}px)`;
+            noBtn.style.transition = "transform 0.3s ease";
+        }
+
+    
+            setInterval(() => {
+                let heart = document.createElement("div");
+                heart.className = "heart";
+                heart.innerHTML = "<h1>💖</h1>";
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 6000);
+            }, 400);
+
+        function launchConfetti() {
+            for (let i = 0; i < 30; i++) {
+                let confetti = document.createElement("div");
+                confetti.innerHTML = "🎉";
+                confetti.style.position = "fixed";
+                confetti.style.left = Math.random() * 100 + "vw";
+                confetti.style.top = "-20px";
+                confetti.style.fontSize = "24px";
+                confetti.style.animation = "floatUp 3s linear";
+
+                document.body.appendChild(confetti);
+
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+
+        function playLoveSound() {
+            let audio = new Audio("love.mp3"); // put your sound file here
+            audio.play();
+        }
+    </script>
+
+    
+    
+</body>
+</html>
